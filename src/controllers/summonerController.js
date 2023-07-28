@@ -27,6 +27,50 @@ async function getSummoner(req, res) {
   }
 }
 
+async function getMatchHistory(req, res, next) {
+  try {
+    // Get name from params
+    const { name } = req.params;
+
+    // Validate
+    if (!name) {
+      return res.status(400).json({ error: "Name required" });
+    }
+
+    // Get summoner
+    console.log(`Fetching summoner ${name}`);
+
+    let summoner;
+
+    summoner = await RiotAPI.getSummoner(name);
+
+    console.log(summoner);
+
+    // Handle 404
+    if (!summoner) {
+      return res.status(404).json({ error: "Summoner not found" });
+    }
+
+    // Get PUUID
+    const { puuid } = summoner;
+
+    console.log("PUUID:", puuid);
+    console.log(typeof puuid);
+
+    // Get matchlist
+    console.log(`Fetching matches for ${name}`);
+
+    const matches = await RiotAPI.getMatchList(puuid);
+
+    // Return matches
+
+    res.json(matches);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getSummoner,
+  getMatchHistory,
 };

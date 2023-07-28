@@ -1,9 +1,10 @@
-// summonerRoutes.js
+// routes/summoner.js
+const express = require("express");
+const router = express.Router();
+const summonerController = require("../controllers/summonerController");
 
-const router = require('express').Router();
+router.get("/:name", summonerController.getSummoner);
 
-const summonerController = require('../controllers/summonerController');
-
-router.get('/:name', summonerController.getSummoner);
+router.get("/:name/matches", summonerController.getMatchHistory);
 
 module.exports = router;

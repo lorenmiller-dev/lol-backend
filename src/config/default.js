@@ -7,6 +7,7 @@ const username = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
 const mongo_uri = process.env.MONGODB_URI;
 const NA_URL = process.env.NA1_URL;
+const MATCHES_URL = process.env.MATCH_URL;
 
 module.exports = {
   riot: {
@@ -25,5 +26,6 @@ module.exports = {
 
   url: {
     na1: NA_URL,
+    getMatches: MATCHES_URL,
   },
 };

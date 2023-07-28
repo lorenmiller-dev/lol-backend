@@ -2,6 +2,7 @@ const axios = require("axios");
 const config = require("../config/default");
 
 const base_url = config.url.na1;
+const matches_url = config.url.getMatches;
 const api_key = config.riot.apiKey;
 
 class RiotAPI {
@@ -22,9 +23,9 @@ class RiotAPI {
     }
   }
 
-  async getMatchlist(accountId) {
+  async getMatchList(puuid) {
     try {
-      const url = `${BASE_URL}/lol/match/v4/matchlists/by-account/${accountId}`;
+      const url = `${matches_url}/lol/match/v5/matches/by-puuid/${puuid}/ids`;
 
       const params = {
         beginIndex: 0,
@@ -33,13 +34,12 @@ class RiotAPI {
 
       const response = await axios.get(url, {
         headers: {
-          "X-Riot-Token": API_KEY,
+          "X-Riot-Token": api_key,
         },
         params,
       });
 
-      const { data } = response;
-      return data;
+      return response.data;
     } catch (error) {
       console.error(error);
       throw error;
