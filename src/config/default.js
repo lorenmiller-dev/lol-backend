@@ -1,18 +1,29 @@
-// 
-require('dotenv').config();
+// Load environment variables
+require("dotenv").config();
 
-const config = require('./config/default');
+const riotAPIKey = process.env.RIOT_API_KEY;
+const port = process.env.PORT;
+const username = process.env.DB_USERNAME;
+const password = process.env.DB_PASSWORD;
+const mongo_uri = process.env.MONGODB_URI;
+const NA_URL = process.env.NA1_URL;
 
 module.exports = {
   riot: {
-    apiKey: process.env.RIOT_API_KEY
+    apiKey: riotAPIKey,
   },
 
   ports: {
-    port: process.env.PORT
+    port: port,
   },
 
   db: {
-    dbURL: process.env.DB_URL
-  }
-}
+    username: username,
+    password: password,
+    uri: mongo_uri,
+  },
+
+  url: {
+    na1: NA_URL,
+  },
+};

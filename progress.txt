@@ -1,0 +1,11 @@
+services/ - Start by creating a service module that handles all 
+    interaction with the Riot API. This encapsulates the API logic in one place and exposes clean functions for getting data.
+
+controllers/ - The controllers handle the business 
+    logic for your app's features. You could start these early and stub them to return mock data.
+
+routes/ - The routes define the API endpoints and 
+    map them to controllers. Not much logic here, so lower priority to start.
+    
+models/ - You may want to hold off models until you 
+    can populate them properly with data from the API via controllers/services.

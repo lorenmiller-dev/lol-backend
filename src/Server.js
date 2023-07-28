@@ -1,14 +1,20 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+
 const app = express();
 
-app.get("/summoner", (req, res) => {
-  res.send("Hello Cameron");
-});
+// Middleware
+app.use(bodyParser.json());
 
-app.get("/jr", (req, res) => {
-  res.send("Hello jr");
-});
+// Routes
+const summonerRoutes = require("./routes/summonerRoutes");
+app.use("/summoner", summonerRoutes);
 
-app.listen(3000, () => {
-  console.log("Server started on port 2000");
+// TODO: error handling
+
+// Start server
+const port = 3003;
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
