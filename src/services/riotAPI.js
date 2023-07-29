@@ -29,7 +29,7 @@ class RiotAPI {
 
       const params = {
         beginIndex: 0,
-        endIndex: 20,
+        endIndex: 10,
       };
 
       const response = await axios.get(url, {
@@ -37,6 +37,23 @@ class RiotAPI {
           "X-Riot-Token": api_key,
         },
         params,
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  async getStats(id) {
+    try {
+      const url = `${base_url}/lol/league/v4/entries/by-summoner/${id}`;
+
+      const response = await axios.get(url, {
+        headers: {
+          "X-Riot-Token": api_key,
+        },
       });
 
       return response.data;

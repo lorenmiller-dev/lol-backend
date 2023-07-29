@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 // Routes
 const summonerRoutes = require("./routes/summonerRoutes");
 
-app.use("/summoner", summonerRoutes);
+app.use("/", summonerRoutes);
 
 // TODO: error handling
 
