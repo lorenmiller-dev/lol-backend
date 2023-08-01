@@ -19,7 +19,7 @@ class RiotAPI {
       return response.data;
     } catch (error) {
       console.error(error);
-      throw error;
+      return res.status(500).json({ error: "API KEY EXPIRED" });
     }
   }
 
@@ -44,6 +44,10 @@ class RiotAPI {
       console.error(error);
       throw error;
     }
+  }
+
+  async getMatchInfo(matchId) {
+
   }
 
   async getStats(id) {
