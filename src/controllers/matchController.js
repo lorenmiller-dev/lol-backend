@@ -9,11 +9,11 @@ async function getMatchHistory(req, res) {
       return res.status(400).json({ error: "Name required" });
     }
 
-    console.log(`Fetching summoner ${name}`);
+    // console.log(`Fetching summoner ${name}`);
 
     const summoner = await summonerService.getSummoner(name);
 
-    console.log(summoner);
+    // console.log(summoner);
 
     // Handle 404
     if (!summoner) {
@@ -23,11 +23,11 @@ async function getMatchHistory(req, res) {
     // Get PUUID
     const { puuid } = summoner;
 
-    console.log("PUUID:", puuid);
+    // console.log("PUUID:", puuid);
     // console.log(typeof puuid);
 
     // Get matchlist
-    console.log(`Fetching matches for ${name}`);
+    // console.log(`Fetching matches for ${name}`);
 
     const matches = await matchService.getMatchList(puuid);
 
@@ -46,6 +46,30 @@ async function getMatchHistory(req, res) {
   }
 }
 
+async function getMatchById(req, res) {
+  try {
+    const { matchId } = req.params;
+
+    if (!matchId) {
+      return res.status(400).json({ error: "Match ID required" });
+    }
+
+    // Fetch the match by its ID
+    const match = await matchService.getMatchInfo(matchId);
+
+    // Handle 404 if match not found
+    if (!match) {
+      return res.status(404).json({ error: "Match not found" });
+    }
+
+    // Return the match details
+    res.json(match);
+  } catch (error) {
+    // Handle errors
+    return res.status(500).json({ message: "Server error" });
+  }
+}
 module.exports = {
   getMatchHistory,
+  getMatchById,
 };

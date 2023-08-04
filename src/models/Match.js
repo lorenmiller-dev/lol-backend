@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const matchSchema = new mongoose.Schema({
   metadata: {
     matchId: { type: String, required: true },
-    participants: { type: [String], required: true },
+    participants: [{ type: [String], required: true }],
   },
 
   info: {
@@ -18,13 +18,13 @@ const matchSchema = new mongoose.Schema({
     participants: [
       {
         challenges: {
-          kda: { type: Number, required: true },
+          kda: Number,
         },
 
         // champion
         champLevel: { type: Number, required: true },
-        champId: { type: Number, required: true },
-        champName: { type: String, required: true },
+        championId: { type: Number, required: true },
+        championName: { type: String, required: true },
 
         // items
         item0: { type: Number, required: true },
@@ -45,12 +45,12 @@ const matchSchema = new mongoose.Schema({
 
         // position
         lane: { type: String, required: true },
-        teamPosition: { type: Number, required: true },
-        role: { type: Number, required: true },
+        teamPosition: String,
+        role: { type: String, required: true },
 
         // participant
         participantId: { type: Number, required: true },
-        summonerId: { type: Number, required: true },
+        summonerId: { type: String, required: true },
         summonerName: { type: String, required: true },
 
         // win or loss
