@@ -23,6 +23,23 @@ class RiotAPI {
     }
   }
 
+  async getSummonerStats(id) {
+    try {
+      const url = `${base_url}/lol/league/v4/entries/by-summoner/${id}`;
+
+      const response = await axios.get(url, {
+        headers: {
+          "X-Riot-Token": api_key,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   async getMatchList(puuid) {
     try {
       const url = `${matches_url}/lol/match/v5/matches/by-puuid/${puuid}/ids`;
@@ -47,12 +64,8 @@ class RiotAPI {
   }
 
   async getMatchInfo(matchId) {
-
-  }
-
-  async getStats(id) {
     try {
-      const url = `${base_url}/lol/league/v4/entries/by-summoner/${id}`;
+      const url = `${matches_url}/lol/match/v5/matches/${matchId}`;
 
       const response = await axios.get(url, {
         headers: {

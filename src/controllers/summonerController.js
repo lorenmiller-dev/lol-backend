@@ -1,3 +1,4 @@
+const riotAPI = require("../services/riotAPI");
 const summonerService = require("../services/summonerService");
 
 async function getSummoner(req, res) {
@@ -22,19 +23,6 @@ async function getSummoner(req, res) {
   }
 }
 
-async function getSummonerStats(req, res) {
-  const { name } = req.params;
-
-  try {
-    const summoner = await RiotAPI.getSummoner(name);
-
-    const { id } = summoner;
-    const stats = await RiotAPI.getStats(id);
-    res.json(stats);
-  } catch (error) {}
-}
-
 module.exports = {
   getSummoner,
-  getSummonerStats,
 };

@@ -4,9 +4,9 @@ const Match = require("../models/Match");
 
 async function getMatchList(puuid) {
   try {
-    console.log('Fetching match list for PUUID:', puuid);
+    console.log("Fetching match list for PUUID:", puuid);
     const matchList = await RiotAPI.getMatchList(puuid);
-    console.log('Match list:', matchList);
+    console.log("Match list:", matchList);
     return matchList;
   } catch (error) {
     console.error("Error in getMatchList:", error);
@@ -14,10 +14,10 @@ async function getMatchList(puuid) {
   }
 }
 
-async function getMatchById(matchId) {
+async function getMatchInfo(matchId) {
   try {
     // Check if the match exists in the database
-    const existingMatch = await Match.findById(matchId);
+    const existingMatch = await Match.findOne({ "metadata.matchId": matchId });
 
     if (!existingMatch) {
       // If the match doesn't exist in the database, fetch it from the Riot API
@@ -41,11 +41,12 @@ async function getMatchById(matchId) {
       return existingMatch;
     }
   } catch (error) {
-    console.error("Error in getMatchById:", error);
+    console.error("Error in getMatchInfo:", error);
     throw error;
   }
 }
 
 module.exports = {
   getMatchList,
+  getMatchInfo,
 };
